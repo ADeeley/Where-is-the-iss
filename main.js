@@ -1,25 +1,30 @@
+const devMode = true; // use mocked lat long so we don't spam the API
+const openNotifyApi = 'http://api.open-notify.org/iss-now.json';
 
-fetch('http://api.open-notify.org/iss-now.json')
-	.then((response) => {
-		return response.json();
-	})
-	.then((data) => {
-		drawMap(data.iss_position)
-	});
+if (devMode) {
+	drawMap({ latitude: "43.7988", longitude: "155.2097" });
+} else {
+	fetch(openNotifyApi)
+		.then((response) => {
+			return response.json();
+		})
+		.then((data) => {
+			drawMap(data.iss_position)
+		});
+}
 
 function drawMap(position) {
 	map = new OpenLayers.Map("mapdiv");
 	map.addLayer(new OpenLayers.Layer.OSM());
 
-	var lonLat = new OpenLayers.LonLat(position.longitude, position.latitude)
+	const lonLat = new OpenLayers.LonLat(position.longitude, position.latitude)
 		.transform(
 			new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
 			map.getProjectionObject() // to Spherical Mercator Projection
 		);
 
-	var zoom = 4;
-
-	var markers = new OpenLayers.Layer.Markers("Markers");
+	const zoom = 4;
+	const markers = new OpenLayers.Layer.Markers("Markers");
 	map.addLayer(markers);
 
 	markers.addMarker(new OpenLayers.Marker(lonLat));

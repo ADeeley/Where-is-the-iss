@@ -1,0 +1,23 @@
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+}
+
+h1 {
+	font-family: 'Bowlby One SC';
+}
+
+#mapdiv {
+	width: 60vw;
+	height: 60vh;
+	border: 10px solid white;
+}
+
+#issSvg {
+	position: absolute;
+	width: 95vw;
+	height: 95vh;
+}
