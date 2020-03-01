@@ -3,11 +3,11 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: "Open-Sans";
+  font-family: "Open Sans";
 }
 
 h1 {
-  font-family: "Bowlby One SC";
+  font-family: "Oxanium";
   z-index: 1;
   background: white;
   padding: 1rem;
