@@ -8,10 +8,13 @@ body {
 
 h1 {
 	font-family: 'Bowlby One SC';
+	z-index: 1;
+	background: white;
+	padding: 1rem;
 }
 
 #mapdiv {
-	width: 60vw;
+	width: 90vw;
 	height: 60vh;
 	border: 10px solid white;
 }
