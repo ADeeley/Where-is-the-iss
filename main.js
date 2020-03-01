@@ -25,11 +25,14 @@ function getData() {
 			drawDetails(data.iss_position);
 		});
 }
-/* function drawMarker() {
-	var size = new OpenLayers.Size(21, 25);
+function drawMarker(lonLat) {
+/* 	var size = new OpenLayers.Size(21, 25);
 	var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
-	var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset);
-} */
+	var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset); */
+	markers.removeMarker(issMarker);
+	issMarker = new OpenLayers.Marker(lonLat);
+	markers.addMarker(issMarker);
+}
 
 function drawMap(position) {
 	map.addLayer(new OpenLayers.Layer.OSM());
@@ -41,9 +44,7 @@ function drawMap(position) {
 		);
 
 	const zoom = 1;
-	markers.removeMarker(issMarker);
-	issMarker = new OpenLayers.Marker(lonLat);
-	markers.addMarker(issMarker);
+	drawMarker(lonLat);
 	map.setCenter(lonLat, zoom);
 }
 

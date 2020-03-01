@@ -147,20 +147,21 @@ function getData() {
     drawDetails(data.iss_position);
   });
 }
-/* function drawMarker() {
-	var size = new OpenLayers.Size(21, 25);
-	var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
-	var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset);
-} */
 
+function drawMarker(lonLat) {
+  /* 	var size = new OpenLayers.Size(21, 25);
+  	var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
+  	var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset); */
+  markers.removeMarker(issMarker);
+  issMarker = new OpenLayers.Marker(lonLat);
+  markers.addMarker(issMarker);
+}
 
 function drawMap(position) {
   map.addLayer(new OpenLayers.Layer.OSM());
   var lonLat = new OpenLayers.LonLat(position.longitude, position.latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
   var zoom = 1;
-  markers.removeMarker(issMarker);
-  issMarker = new OpenLayers.Marker(lonLat);
-  markers.addMarker(issMarker);
+  drawMarker(lonLat);
   map.setCenter(lonLat, zoom);
 }
 
