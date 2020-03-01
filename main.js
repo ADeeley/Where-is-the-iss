@@ -1,4 +1,4 @@
-const devMode = false; // use mocked lat long so we don't spam the API
+const devMode = true; // use mocked lat long so we don't spam the API
 const openNotifyApi = 'http://api.open-notify.org/iss-now.json';
 const dataFetchInterval = 30000;
 const map = new OpenLayers.Map("mapdiv");
@@ -23,14 +23,15 @@ function getData() {
 		.then((data) => {
 			drawMap(data.iss_position);
 			drawDetails(data.iss_position);
+
 		});
 }
 function drawMarker(lonLat) {
-/* 	var size = new OpenLayers.Size(21, 25);
+ 	var size = new OpenLayers.Size(25, 25);
 	var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
-	var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset); */
+	var icon = new OpenLayers.Icon('./ISS.svg', size, offset);
 	markers.removeMarker(issMarker);
-	issMarker = new OpenLayers.Marker(lonLat);
+	issMarker = new OpenLayers.Marker(lonLat, icon);
 	markers.addMarker(issMarker);
 }
 
