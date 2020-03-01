@@ -1,7 +1,10 @@
-const devMode = true	; // use mocked lat long so we don't spam the API
+const devMode = false; // use mocked lat long so we don't spam the API
 const openNotifyApi = 'http://api.open-notify.org/iss-now.json';
 const dataFetchInterval = 30000;
 const map = new OpenLayers.Map("mapdiv");
+const markers = new OpenLayers.Layer.Markers("Markers");
+let issMarker;
+map.addLayer(markers);
 
 if (devMode) {
 	const data = { latitude: "-6.7052", longitude: "46.7854" };
@@ -9,6 +12,7 @@ if (devMode) {
 	drawDetails(data);
 } else {
 	getData();
+	setInterval(getData, dataFetchInterval);
 }
 
 function getData() {
@@ -21,11 +25,11 @@ function getData() {
 			drawDetails(data.iss_position);
 		});
 }
-function drawMarker() {
+/* function drawMarker() {
 	var size = new OpenLayers.Size(21, 25);
 	var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
 	var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset);
-}
+} */
 
 function drawMap(position) {
 	map.addLayer(new OpenLayers.Layer.OSM());
@@ -37,16 +41,12 @@ function drawMap(position) {
 		);
 
 	const zoom = 1;
-	const markers = new OpenLayers.Layer.Markers("Markers");
-	map.addLayer(markers);
-
-	markers.addMarker(new OpenLayers.Marker(lonLat));
-
+	markers.removeMarker(issMarker);
+	issMarker = new OpenLayers.Marker(lonLat);
+	markers.addMarker(issMarker);
 	map.setCenter(lonLat, zoom);
 }
 
 function drawDetails(position) {
 	document.querySelector('#location').innerHTML = (`<p>lat: ${position.latitude}, long: ${position.longitude}</p>`);
 }
-
-setInterval(getData, dataFetchInterval);

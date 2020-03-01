@@ -118,11 +118,14 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"main.js":[function(require,module,exports) {
-var devMode = true; // use mocked lat long so we don't spam the API
+var devMode = false; // use mocked lat long so we don't spam the API
 
 var openNotifyApi = 'http://api.open-notify.org/iss-now.json';
 var dataFetchInterval = 30000;
 var map = new OpenLayers.Map("mapdiv");
+var markers = new OpenLayers.Layer.Markers("Markers");
+var issMarker;
+map.addLayer(markers);
 
 if (devMode) {
   var data = {
@@ -133,6 +136,7 @@ if (devMode) {
   drawDetails(data);
 } else {
   getData();
+  setInterval(getData, dataFetchInterval);
 }
 
 function getData() {
@@ -143,28 +147,26 @@ function getData() {
     drawDetails(data.iss_position);
   });
 }
+/* function drawMarker() {
+	var size = new OpenLayers.Size(21, 25);
+	var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
+	var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset);
+} */
 
-function drawMarker() {
-  var size = new OpenLayers.Size(21, 25);
-  var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
-  var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset);
-}
 
 function drawMap(position) {
   map.addLayer(new OpenLayers.Layer.OSM());
   var lonLat = new OpenLayers.LonLat(position.longitude, position.latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
   var zoom = 1;
-  var markers = new OpenLayers.Layer.Markers("Markers");
-  map.addLayer(markers);
-  markers.addMarker(new OpenLayers.Marker(lonLat));
+  markers.removeMarker(issMarker);
+  issMarker = new OpenLayers.Marker(lonLat);
+  markers.addMarker(issMarker);
   map.setCenter(lonLat, zoom);
 }
 
 function drawDetails(position) {
   document.querySelector('#location').innerHTML = "<p>lat: ".concat(position.latitude, ", long: ").concat(position.longitude, "</p>");
 }
-
-setInterval(getData, dataFetchInterval);
 },{}],"../../../.npm/_npx/11785/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
