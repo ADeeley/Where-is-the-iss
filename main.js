@@ -1,4 +1,4 @@
-const devMode = true; // use mocked lat long so we don't spam the API
+const devMode = false; // use mocked lat long so we don't spam the API
 const openNotifyApi = 'http://api.open-notify.org/iss-now.json';
 const dataFetchInterval = 30000;
 const map = new OpenLayers.Map("mapdiv");
@@ -52,3 +52,9 @@ function drawMap(position) {
 function drawDetails(position) {
 	document.querySelector('#location').innerHTML = (`<p>lat: ${position.latitude}, long: ${position.longitude}</p>`);
 }
+
+function init() {
+	document.querySelector('#updateInterval').innerHTML = `${dataFetchInterval / 1000} seconds`;
+}
+
+init();

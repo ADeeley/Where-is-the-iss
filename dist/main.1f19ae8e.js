@@ -118,7 +118,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"main.js":[function(require,module,exports) {
-var devMode = true; // use mocked lat long so we don't spam the API
+var devMode = false; // use mocked lat long so we don't spam the API
 
 var openNotifyApi = 'http://api.open-notify.org/iss-now.json';
 var dataFetchInterval = 30000;
@@ -168,7 +168,13 @@ function drawMap(position) {
 function drawDetails(position) {
   document.querySelector('#location').innerHTML = "<p>lat: ".concat(position.latitude, ", long: ").concat(position.longitude, "</p>");
 }
-},{}],"../../../.npm/_npx/17807/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+function init() {
+  document.querySelector('#updateInterval').innerHTML = "".concat(dataFetchInterval / 1000, " seconds");
+}
+
+init();
+},{}],"../../../.npm/_npx/33251/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -196,7 +202,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51181" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56066" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -372,5 +378,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../.npm/_npx/17807/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","main.js"], null)
+},{}]},{},["../../../.npm/_npx/33251/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","main.js"], null)
 //# sourceMappingURL=/main.1f19ae8e.js.map
