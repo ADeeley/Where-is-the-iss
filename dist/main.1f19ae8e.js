@@ -117,10 +117,19 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"main.js":[function(require,module,exports) {
+})({"ISS.svg":[function(require,module,exports) {
+module.exports = "/ISS.bb7cc66e.svg";
+},{}],"main.js":[function(require,module,exports) {
+"use strict";
+
+var _ISS = _interopRequireDefault(require("./ISS.svg"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Import the image URL so we can bundle with parcel
 var devMode = false; // use mocked lat long so we don't spam the API
 
-var openNotifyApi = 'http://api.open-notify.org/iss-now.json';
+var openNotifyApi = "http://api.open-notify.org/iss-now.json";
 var dataFetchInterval = 30000;
 var map = new OpenLayers.Map("mapdiv");
 var markers = new OpenLayers.Layer.Markers("Markers");
@@ -151,7 +160,7 @@ function getData() {
 function drawMarker(lonLat) {
   var size = new OpenLayers.Size(25, 25);
   var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
-  var icon = new OpenLayers.Icon('./ISS.svg', size, offset);
+  var icon = new OpenLayers.Icon(_ISS.default, size, offset);
   markers.removeMarker(issMarker);
   issMarker = new OpenLayers.Marker(lonLat, icon);
   markers.addMarker(issMarker);
@@ -166,15 +175,15 @@ function drawMap(position) {
 }
 
 function drawDetails(position) {
-  document.querySelector('#location').innerHTML = "<p>lat: ".concat(position.latitude, ", long: ").concat(position.longitude, "</p>");
+  document.querySelector("#location").innerHTML = "<p>lat: ".concat(position.latitude, ", long: ").concat(position.longitude, "</p>");
 }
 
 function init() {
-  document.querySelector('#updateInterval').innerHTML = "".concat(dataFetchInterval / 1000, " seconds");
+  document.querySelector("#updateInterval").innerHTML = "".concat(dataFetchInterval / 1000, " seconds");
 }
 
 init();
-},{}],"../../../.npm/_npx/33251/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./ISS.svg":"ISS.svg"}],"../../../.npm/_npx/64600/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -202,7 +211,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56066" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51807" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -378,5 +387,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../.npm/_npx/33251/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","main.js"], null)
+},{}]},{},["../../../.npm/_npx/64600/lib/node_modules/parcel/src/builtins/hmr-runtime.js","main.js"], null)
 //# sourceMappingURL=/main.1f19ae8e.js.map
