@@ -2,6 +2,8 @@
 
 A live map to show where the ISS is above the earth
 
+![ISS Tracker Screenshot](assets/iss-map-screenshot.png)
+
 ## Installation
 
 
@@ -10,7 +12,7 @@ A live map to show where the ISS is above the earth
 npm i
 
 #Serve the app
-parcel index.html
+parcel src/index.html
 ```
 
 ## Contributing

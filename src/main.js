@@ -1,5 +1,5 @@
-import url from "./ISS.svg"; // Import the image URL so we can bundle with parcel
-
+import url from "../assets/iss.svg"; // Import the image URL so we can bundle with parcel
+console.log(`../assets${url}`);
 const devMode = false; // use mocked lat long so we don't spam the API
 const openNotifyApi = "http://api.open-notify.org/iss-now.json";
 const dataFetchInterval = 30000;
